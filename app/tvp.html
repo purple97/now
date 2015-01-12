@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <meta name="copyright" content="Copyright &copy;zhh 版权所有"/>
+    <title>微信中嵌入腾讯视频播放</title>
+    <script type="text/javascript">
+        var scale = 1, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iphone/gi)) {
+                scale = 0.5;
+                ratio = 2;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+    <style type="text/css">
+        body,div{ padding:0; margin:0}
+        .playBox{
+            position: relative;
+            background-color: #ccc;
+        }
+        .btn_play{ position:absolute; z-index:9; top:20%; left:50%; width:180px; height:60px; margin-left:-90px;
+            background-color:red; color:#FFF; text-align:center; line-height:60px; }
+        .mod_player{position:absolute; top:0; left:0; width:100%; height:40%;}
+    </style>
+</head>
+<body>
+<div class="playBox">
+    <img class="people" width="100%" username="巴图" vid="t0015f8x1zd" src="http://img1.gtimg.com/news/pics/hv1/112/237/1766/114894697.jpg">
+    <div id="btn_play" class="btn_play">Play</div>
+    <div id="mod_player" class="mod_player"></div>
+</div>
+<script type="text/javascript" src="http://code.createjs.com/preloadjs-0.6.0.min.js"></script>
+<script type="text/javascript" src="../lib/js/plugins/zepto.min.js"></script>
+<!--<script type="text/javascript" src="http://qzs.qq.com/tencentvideo_v1/js/tvp/tvp.player.js"></script>-->
+<script type="text/javascript" src="http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js"></script>
+<script type="text/javascript" >
+$(function(){
+    $(".btn_play").click(function(e){
+        video = new tvp.VideoInfo();
+//        video.setVid($(".layout").eq(pageIndex).find('.people').attr('vid'));
+        video.setVid("t0015f8x1zd");
+        var player = new tvp.Player();
+        player.create({
+            width:$(".mod_player").width(),
+            height:$(".mod_player").height(),
+            video:video,
+            modId:"mod_player",
+            playerType: 'html5',
+            isHtml5UseUI:false,
+            autoplay:true,
+            onallended:function(){
+                console.log("onallended");
+            }
+        });
+        $(".btn_play").hide();
+    })
+});
+
+</script>
+</body>
+</html>

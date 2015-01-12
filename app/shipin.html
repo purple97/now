@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <title></title>
+    <script type="text/javascript">
+        var scale = 1, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iphone/gi)) {
+                scale = 1;
+                ratio = 2;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+</head>
+<body>
+<label><input type="file" style="display:none;">点击我上次图片</label>
+<!--<input type="file" accept="audio/*;capture=microphone">-->
+<article>
+    <style scoped>
+        video { transform: scaleX(-1); }
+        p { text-align: center; }
+    </style>
+    <h1>Snapshot Kiosk</h1>
+    <section id="splash">
+        <p id="errorMessage">Loading...</p>
+    </section>
+    <section id="app" hidden>
+        <p><video id="monitor" autoplay></video> <canvas id="photo"></canvas></p>
+        <p><input type=button value="截图" onclick="snapshot()"></p>
+        <p><img src=""/></p>
+    </section>
+    <script>
+        var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+        try{
+            getUserMedia.call(navigator, {
+                video: true
+                /*
+                 * video: 是否接受视频流
+                 * audio：时候接受音频流
+                 * MinWidth: 视频流的最小宽度
+                 * MaxWidth：视频流的最大宽度
+                 * MinHeight：视频流的最小高度
+                 * MaxHiehgt：视频流的最大高度
+                 * MinAspectRatio：视频流的最小宽高比
+                 * MaxAspectRatio：视频流的最大宽高比
+                 * MinFramerate：视频流的最小帧速率
+                 * MaxFramerate：视频流的最大帧速率
+                 */
+            }, gotStream, noStream);
+            var video = document.getElementById('monitor');
+            var canvas = document.getElementById('photo');
+        }catch(e){
+            alert(e)
+        }
+        function gotStream(stream) {
+            video.src = URL.createObjectURL(stream);
+            video.onerror = function () {
+                stream.stop();
+            };
+            stream.onended = noStream;
+            video.onloadedmetadata = function () {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                document.getElementById('splash').hidden = true;
+                document.getElementById('app').hidden = false;
+            };
+        }
+        function noStream() {
+            document.getElementById('errorMessage').textContent = 'No camera available.';
+        }
+        function snapshot() {
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            document.querySelector('img').src = canvas.toDataURL('image/webp');
+        }
+    </script>
+</article>
+
+</body>
+</html>

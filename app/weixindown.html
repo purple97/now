@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <meta name="copyright" content="Copyright &copy; 版权所有"/>
+    <title>测试手机栅栏系统</title>
+</head>
+<body>
+<script type="text/javascript">
+    var str = "${title},${name},${title},name";
+    var arr = {"title":"测试手机栅栏系统","name":"Purple"};
+    console.log(str.match(/\$\{\w*\}/g));
+    for(var i in arr ){
+        var rex = eval("\/\\$\\{"+i+"\\}\/gi");
+        str = str.replace(rex, arr[i]);
+    }
+    console.log(str);
+
+    var url ='http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js%20localStorage&rsv_pq=f9eb38e900192c72&rsv_t=ba4czioW6qcpnIeeKsI8wPi7GyYbXMg2rpjd1EZZrH0%2ByT8nJIQTlBofVB0&bs=js%20replace';
+    console.log(url.split(/[\?]|[\&]/g));
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="file" id="file1" onchange="testsize()" />
+<script>
+    var uploadfile = {
+        issupport: false,
+        size: 0,
+        imgwidth: 0,
+        imgheight: 0,
+        flag: false
+    };
+    String.prototype.endWith = function (str) {
+        if (str == null || str == "" || this.length == 0 || str.length > this.length)
+            return false;
+        if (this.substring(this.length - str.length) == str)
+            return true;
+        else
+            return false;
+        return true;
+    };
+    function uploadfilesize(id) {
+        var fobj = null;
+        if ('string' == typeof(id)) {
+            fobj = eval(id);
+        } else {
+            fobj = id;
+        }
+        if (fobj.files) {//
+            uploadfile.size = fobj.files[0].fileSize;
+            if (fobj.files[0].fileSize == undefined) { //opera
+                uploadfile.size = fobj.files[0].size;
+                uploadfile.issupport = true;
+            }
+            uploadfile.issupport = true;
+        } else if (navigator.userAgent.indexOf("MSIE") > 0) {//IE
+            uploadfile.issupport = false;
+        } else {
+            uploadfile.issupport = false;
+        }
+    }
+    function isuploadtypes(id, types) {
+        var fobj = null;
+        if ('string' == typeof(id)) {
+            fobj = eval(id);
+        } else {
+            fobj = id;
+        }
+        var name = fobj.value;
+        if (types != null && types.length > 0) {
+            for (var i = 0; i < types.length; i++) {
+                if (name.toLowerCase().endWith(types[i])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    function isuploadimg(id) {
+        var fobj = null;
+        if ('string' == typeof(id)) {
+            fobj = eval(id);
+        } else {
+            fobj = id;
+        }
+        var name = fobj.value;
+        if (name.toLowerCase().endWith(".jpg")
+                || name.toLowerCase().endWith(".jpeg")
+                || name.toLowerCase().endWith(".png")
+                || name.toLowerCase().endWith(".bmp")) {
+            return true;
+        }
+        return false;
+    }
+    var image = new Image();
+    function uploadimg(id) {
+        var fobj = null;
+        if ('string' == typeof(id)) {
+            fobj = eval(id);
+        } else {
+            fobj = id;
+        }
+
+        if (fobj.files) {//
+            uploadfile.size = fobj.files[0].fileSize;
+            if (fobj.files[0].fileSize == undefined) { //opera
+                //image.src = fobj.value;
+                uploadfile.issupport = false;
+            } else if (navigator.vendor.indexOf("Google") >= 0) {//google
+                //alert(file1.files[0].path);//还未找到办法
+                uploadfile.issupport = false;
+            } else {//火狐
+                uploadfile.issupport = true;
+                image.src = fobj.files.item(0).getAsDataURL();
+            }
+        } else if (navigator.userAgent.indexOf("MSIE") > 0) {//IE
+            uploadfile.issupport = true;
+            image.src = fobj.value;
+            uploadfile.size = image.fileSize;
+        } else {
+            uploadfile.issupport = false;
+        }
+        a
+        if (uploadfile.issupport) {
+            image.style.cssText = "display:block;position:absolute; left: -5000px; top:-5000px;";
+            document.body.appendChild(image);
+            uploadfile.imgwidth = image.width;
+            uploadfile.imgheight = image.height;
+            if (uploadfile.imgwidth == 0) {
+                uploadfile.imgwidth = image.offsetWidth;
+                uploadfile.imgheight = image.offsetHeight;
+            }
+            if (fobj.files) {
+                setTimeout("pausetime()", 0.0000000000001);
+            } else {
+                setTimeout("pauseietime()", 200);
+                image.onreadystatechange = function () {
+                    if (image.readyState == "complete") {
+                        uploadfile.size = image.fileSize;
+                        uploadfile.imgwidth = image.offsetWidth;
+                        uploadfile.imgheight = image.offsetHeight;
+                        if (document.body.contains(image)) {
+                            document.body.removeChild(image);
+                            uploadfile.flag = true;
+                        }
+                        //getHeight();
+                    }
+                }
+            }
+            fobj = null;
+        }
+    }
+    /**
+     * 四舍五入函数
+     * @param {} Dight
+     * @param {} How
+     * @return {}
+     */
+    function ForDight(Dight, How) {
+        Dight = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How);
+        return Dight;
+    }
+    function getFileSize(filesize) {
+        var size = "未知";
+        var tmp = 0;
+        if (filesize != 0) {
+            tmp = ForDight(filesize / 1024, 2);
+            if (tmp < 1) {
+                size = "1KB";
+            } else if (tmp < 1024 && tmp > 1) {
+                tmp = ForDight(filesize / 1024, 0);
+                size = tmp + "KB";
+            } else {
+                tmp = ForDight(tmp / 1024, 2);
+                if (tmp < 1024) {
+                    size = tmp + "MB";
+                } else {
+                    tmp = ForDight(tmp / 1024, 2);
+                    size = tmp + "GB";
+                }
+            }
+        }
+
+        return size;
+    }
+    function pausetime() {
+        uploadfile.imgwidth = image.offsetWidth;
+        uploadfile.imgheight = image.offsetHeight;
+        document.body.removeChild(image);
+        uploadfile.flag = true;
+        getHeight();
+    }
+    function pauseietime() {
+        if (document.body.contains(image)) {
+            document.body.removeChild(image);
+            if (image.fileSize < 5 || (image.height == 30 && image.width == 28)) {
+                uploadfile.flag = false;
+            } else {
+                uploadfile.flag = true;
+            }
+        }
+        getHeight();
+    }
+    function testsize() {
+        console.log(111);
+        if (isuploadtypes('file1', ['.jpg', '.gif', '.png', '.bmp', '.txt'])) {
+            uploadimg('file1');
+        } else {
+            alert('上传文件格式不对');
+        }
+    }
+    function getHeight() {
+        if (uploadfile.flag) {
+            alert("高度：" + uploadfile.imgheight + "宽度：" + uploadfile.imgwidth);
+            //alert("宽度"+uploadfile.imgwidth);
+            alert("大小：" + getFileSize(uploadfile.size));
+        } else {
+            alert('检测图片出错，请修改您的图片再上传');
+        }
+    }
+</script>
+</body>
+</html>

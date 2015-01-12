@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panorama>
+<!-- Pano2VR 3.0 panorama configuration -->
+<view fovmode="0">
+    <!-- pan 角度； tilt 仰角；fov视距 -->
+    <!-- <start>默认设置 -->
+    <!-- <min>最小设置 -->
+    <!-- <max>最大设置 -->
+    <start  pan="344"   tilt="11.5" fov="90"/>
+    <min    pan="0"     tilt="-90" fov="5"/>
+    <max    pan="360"   tilt="90" fov="120"/>
+</view>
+    <!-- 自动播放设置 -->
+    <!-- speed 播放频率，delay 播放延时；returntohorizon 仰角可以为负值；startloaded -->
+    <!--<autorotate speed="0.300" delay="0" returntohorizon="0" startloaded="0" />-->
+
+<!-- 基本设置 -->
+<input tilesize="1500" tilescale="1.00667" 
+	tile0url="../dist/images/360/01_maria_o_0.jpg" 
+	tile1url="../dist/images/360/01_maria_o_1.jpg" 
+	tile2url="../dist/images/360/01_maria_o_2.jpg" 
+	tile3url="../dist/images/360/01_maria_o_3.jpg" 
+	tile4url="../dist/images/360/01_maria_o_4.jpg" 
+	tile5url="../dist/images/360/01_maria_o_5.jpg" />
+	
+<altinput screensize="1025" tilesize="800" tilescale="1.00667" 
+	tile0url="../dist/images/360/01_maria_o_800_0.jpg" 
+	tile1url="../dist/images/360/01_maria_o_800_1.jpg" 
+	tile2url="../dist/images/360/01_maria_o_800_2.jpg" 
+	tile3url="../dist/images/360/01_maria_o_800_3.jpg" 
+	tile4url="../dist/images/360/01_maria_o_800_4.jpg" 
+	tile5url="../dist/images/360/01_maria_o_800_5.jpg" />
+
+<altinput screensize="500" tilesize="400" tilescale="1.00667" 
+	tile0url="../dist/images/360/01_maria_o_400_0.jpg" 
+	tile1url="../dist/images/360/01_maria_o_400_1.jpg" 
+	tile2url="../dist/images/360/01_maria_o_400_2.jpg" 
+	tile3url="../dist/images/360/01_maria_o_400_3.jpg" 
+	tile4url="../dist/images/360/01_maria_o_400_4.jpg" 
+	tile5url="../dist/images/360/01_maria_o_400_5.jpg" />
+
+<!-- <userdata title="Maria-Theresien-Platz" description="The square dedicated to Maria Theresa" author="A. Gnome" datetime="Summer 2010" copyright="A. Gnome" source="" info="" comment="" /> -->
+<userdata title="" datetime="" description="" copyright="" tags="" author="" source="" comment="" info="" longitude="" latitude=""/>
+
+<!-- <control sensitifity="1" simulatemass="1" lockedmouse="0" lockedkeyboard="0" lockedwheel="0" invertwheel="0" speedwheel="1" invertcontrol="1" /> -->
+<control sensitivity="2" simulatemass="1" lockedmouse="0" lockedkeyboard="0" lockedwheel="0" invertwheel="0" speedwheel="1" invertcontrol="1" dblclickfullscreen="0"/>
+<hotspots width="180" height="20" wordwrap="1" >
+    <label width="180" backgroundalpha="1" enabled="1" height="20" backgroundcolor="0xffffff" bordercolor="0x000000" border="1" textcolor="0x000000" background="1" borderalpha="1" borderradius="1" wordwrap="1" textalpha="1"/>
+    <polystyle mode="0" backgroundalpha="0.2509803921568627" backgroundcolor="0x0000ff" bordercolor="0x0000ff" borderalpha="1"/>
+	<!-- 点 -->
+    <!-- pan 角度； tilt 仰角；fov视距 -->
+	<hotspot id="new" skinid="" pan="172.166" tilt="1" title="点" url="02_ring_out.swf" target="_self" />
+    <hotspot id="Point04" skinid="foo6" title="foo2" target="_self" pan="200.78" url="javascript:alert('Hi~');" tilt="-12"/>
+    <!-- <hotspot title="foo2" target="_self" pan="-75" skinid="foo5" url="javascript:sc.main.openModal(0, true);" id="Point01" tilt="10"/> -->
+</hotspots>
+<sounds>
+</sounds>
+</panorama>

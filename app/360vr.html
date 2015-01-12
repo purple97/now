@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <title>360度全景</title>
+    <script type="text/javascript">
+        var scale = 2, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iphone/gi)) {
+                scale = 1;
+                ratio = 2;
+            }else if (window.devicePixelRatio === 3) {
+                scale = 0.5;
+                ratio = 3;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+
+    <script type="text/javascript">
+        // hide URL field on the iPhone/iPod touch
+        function hideUrlBar() {
+            // hide URL field on the iPhone/iPod touch
+            var p = String(navigator.platform);
+            container = document.getElementById("container");
+            var cheight = window.innerHeight;
+            if ((cheight) && ((container.offsetHeight != cheight) || (window.innerHeight != cheight))) {
+                container.style.height = cheight + "px";
+            }
+            document.getElementsByTagName("body")[0].style.marginTop = "1px";
+            window.scrollTo(0, 1);
+        }
+    </script>
+</head>
+<body>
+<script src="http://cdn.bootcss.com/PreloadJS/0.4.1/preloadjs.min.js"></script>
+<!-- vr 核心插件 -->
+<script type="text/javascript" src="../lib/js/plugins/vr/pano2vr_player.js"></script>
+<!-- vr 手势操作插件 -->
+<script type="text/javascript" src="../lib/js/plugins/vr/pano2vrgyro.js"></script>
+<!-- VR 兼容处理相关 -->
+<script type="text/javascript" src="../lib/js/plugins/vr/p2q_embed_object.js"></script>
+<!-- vr 锚点 创建/控制 插件 -->
+<script type="text/javascript" src="../lib/js/plugins/vr/skin.js"></script>
+<!-- Dom 操作插件 -->
+<script type="text/javascript" src="../lib/js/plugins/zepto.min.js"></script>
+<!-- preload 加载资源相关 -->
+<!--<script type="text/javascript" src="../lib/js/plugins/preloadjs.min.js"></script>-->
+<script type="text/javascript">
+    //创建VR
+    function createPano(id, config) {
+        var pano = new pano2vrPlayer(id);
+        var skin = new pano2vrSkin(pano);
+        pano.readConfigUrl(config);
+        var gyro = new pano2vrGyro(pano, id);
+        return pano;
+    }
+    //初始化设置
+    function preInit() {
+        if (window.addEventListener) {
+            window.addEventListener("load", hideUrlBar);
+            window.addEventListener("resize", hideUrlBar);
+            window.addEventListener("orientationchange", hideUrlBar);
+        }
+        setTimeout(function() {
+            hideUrlBar();
+        }, 10);
+
+       /*
+       //微信相关
+       WeixinApi.ready(function(Api) {
+            // Api.hideOptionMenu();
+            Api.shareToFriend(sc.weixinData, wxCallbacks);
+            Api.shareToTimeline(sc.weixinData, wxCallbacks);
+            Api.shareToWeibo(sc.weixinData, wxCallbacks);
+        });
+        */
+        //声音
+        bgMusic = document.getElementById("song");
+        //转屏
+        window.onorientationchange = function() {
+            if (window.orientation == 90 || window.orientation == -90) {
+                $('.horizontal').fadeIn();
+            } else {
+                $('.horizontal').fadeOut();
+            }
+        };
+
+        document.querySelector('body').addEventListener('touchmove',function(e) {
+            e.preventDefault();
+        },false);
+    }
+
+    // create panorama container
+    document.writeln('<div id="container" style="width:100%;height:100%;"></div>');
+    preInit();
+    //加载配置并创建VR
+    createPano("container", "01_maria_out.xml");
+</script>
+<noscript>
+    <p><b>Please enable Javascript!</b></p>
+</noscript>
+</body>
+</html>

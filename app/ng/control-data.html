@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <title>control-data</title>
+    <script type="text/javascript">
+        var scale = 1, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iphone/gi)) {
+                scale = 0.5;
+                ratio = 2;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+</head>
+<body>
+    <!--个控制器中传值-->
+    <h1>两个控制器中传值：</h1>
+    <p>需要创建一个服务来存中间的值(instance.name)</p>
+    <div ng-app="angularDataTest">
+        <div ng-controller="control_1">
+            <p>inputValue：<input type="text" ng-model="inputValue"/> <span ng-bind="inputValue"></span></p>
+            <button ng-click="change()">传递给中间服务instance</button>
+        </div>
+        <div ng-controller="control_2">
+            <p>传过来的值scope.name：<span ng-bind="name"></span></p>
+            <button ng-click="show()">显示$scope.name</button>
+        </div>
+    </div>
+    <!--/个控制器中传值-->
+    <hr/>
+    <script src="../../lib/js/plugins/angular/1.3.0/angular.min.js"></script>
+    <script src="../../lib/js/angularDataTest.js"></script>
+</body>
+</html>

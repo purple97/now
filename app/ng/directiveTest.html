@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <title>directive - Test</title>
+    <script type="text/javascript">
+        var scale = 1, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iphone/gi)) {
+                scale = 0.5;
+                ratio = 2;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+</head>
+<body>
+<!--/个控制器中传值-->
+<hr/>
+<!-- directive 作用域 -->
+<h1> directive 作用域: </h1>
+<div ng-app="directiveTest">
+    <div ng-controller="dirCtrl_1">
+        <my-customer  val="dir1"></my-customer>
+        <my-customer  val="dir2"></my-customer>
+        <input type="text"  ng-model="userInput" my-input  name="dezhao" xing="chen" on-ok="alert(1)" />
+        <br/>
+        <span my-current-sms="userInput">{{userInput}}<b style="font-size:12px;">{{uptime}}</b></span>
+    </div>
+</div>
+<!-- /directive 作用域 -->
+<script src="../../lib/js/plugins/angular/1.3.0/angular.min.js"></script>
+<script src="../../lib/js/directiveTest.js"></script>
+</body>
+</html>
