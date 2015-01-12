@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="no" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="zhh" name="apple-mobile-web-app-title">
+    <meta name="copyright" content="Copyright &copy;zhh 版权所有"/>
+    <link rel="apple-touch-icon" href="../images/72x72.png"/>
+    <link rel="apple-touch-icon" href="../images/114x114.png"/>
+    <link rel="apple-touch-icon" href="../images/72x72.png" sizes="72x72"/>
+    <link rel="apple-touch-icon" href="../images/114x114.png" sizes="114x114"/>
+    <title></title>
+    <script type="text/javascript">
+        var scale = 1, ratio = 1;
+        (function () {
+            if (window.devicePixelRatio === 2 && window.navigator.appVersion.match(/iPhone/gi)) {
+                scale = 1;
+                ratio = 2;
+            }
+            var text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no" />';
+            document.write(text);
+        })();
+    </script>
+    <link type="text/css"  rel="stylesheet" href="../dest/css/index.css">
+</head>
+<body>
+<div class="warp" id="warp">
+    <div class="side" id="sidemune">
+        <div class="content">
+            <header class="header"></header>
+            <section class="block">
+                <ul>
+                    <li><a href="#page1">page1</a></li>
+                    <li><a href="#page2">page2</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <div class="page" id="page1">
+        <div class="content">
+            <header class="header">
+                <a href="#sidemune">go mune</a>
+                111111
+            </header>
+            <section class="block">
+                content
+                <a href="#page2">go page2</a>
+            </section>
+            <footer class="footer">footer</footer>
+        </div>
+    </div>
+
+    <div class="page right100" id="page2">
+        <div class="content">
+            <header class="header">
+                <a href="#page1">black</a>
+                22222
+            </header>
+            <section class="block">
+                content
+            </section>
+            <footer class="footer">footer</footer>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../src/plugins/angular/angular-route.min.js"></script>
+<script type="text/javascript" src="../src/plugins/angular/angular.min.js"></script>
+<script type="text/javascript" src="../src/js/pagetab.js"></script>
+<script>
+    var pt = new pageTab(document.querySelector("#warp"));
+    pt.init()
+</script>
+</body>
+</html>
