@@ -444,24 +444,9 @@ a:hover {
   height: 1960px;
   min-height: 960px;
 }
-#content {
-  width: 640px;
-  font-size: 24px;
-}
-[data-dpr="1"] #content {
-  width: 320px;
-  font-size: 12px;
-}
-[data-dpr="2"] #content {
-  width: 640px;
-  font-size: 24px;
-}
-[data-dpr="3"] #content {
-  width: 960px;
-  font-size: 36px;
-}
 #content .item {
   background-color: #ccc;
   width: 50%;
-  height: 400px;
+  height: 20rem;
 }
+/*# sourceMappingURL=index.css.map */
