@@ -9,3 +9,9 @@ now
 2015-1-19
     git 命令测试
 
+2015-1-20
+	增加 backbone.js框架
+	增加 input[type=file] 效果H5应用页面
+	增加 hummer.js手势插件
+	更新微信api接口测试js： wxApiTest.js
+	
