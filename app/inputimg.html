@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>爱德兰丝假发试戴demo</title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script>
+        var phoneWidth = parseInt(window.screen.width);
+        var phoneScale = phoneWidth / 640;
+        var ua = navigator.userAgent;
+        if (/Android (\d+\.\d+)/.test(ua)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script>
+    <link type="text/css" rel="stylesheet" href="http://182.151.199.66:5082/hair/css/main.css" />
+</head>
+<body>
+<div id="load"></div>
+<!--遮罩层-->
+<section class="bg"></section>
+<!--背景 end-->
+
+<canvas id="canvas-load" width="640" height="800"></canvas>
+<!--预加载遮罩层 end-->
+
+<h1></h1>
+<!--标题 end-->
+
+<label for="input-file" id="upload">
+    选择照片!
+    <input type="file"  id="input-file" accept="image/*" capture="camera" name="upfile"/>
+</label>
+<!--上传图像 end-->
+
+<img id="user" src="" alt="" width="200"/>
+<img id="hair" src="" alt="" width="200"/>
+<!--人物和假发图像-->
+
+<section id="setting">
+    <span id="cute" class="button">&nbsp;换假发</span>
+    <label id="char" class="button" for="input-file2">
+        &nbsp;换角色
+        <input type="file"  id="input-file2" accept="image/*" capture="camera" name="upfile"/>
+    </label>
+</section>
+<!--选取人物或者假发-->
+
+<section id="clothesBox">
+    <h2>选择一顶喜欢的假发吧！</h2>
+    <ul>
+        <li><img data-src="data/hair1.png" data-url='hair1.png' alt=""/></li>
+        <li><img data-src="data/hair2.png" data-url='hair2.png' alt=""/></li>
+        <li><img data-src="data/hair3.png" data-url='hair3.png' alt=""/></li>
+        <li><img data-src="data/hair4.png" data-url='hair4.png' alt=""/></li>
+        <li><img data-src="data/hair5.png" data-url='hair5.png' alt=""/></li>
+        <li><img data-src="data/hair6.png" data-url='hair6.png' alt=""/></li>
+    </ul>
+</section>
+<!--假发店 end-->
+
+</body>
+<script src="../lib/js/plugins/zepto.min.js"></script>
+<script src="../lib/js/plugins/hammer.min.js"></script>
+<script>
+
+$(function(){
+
+    //预加载
+    var preLoad = function preLoad(){
+        var d = document;
+        var imgArr = ['hair1.png','hair2.png','hair3.png','hair4.png','hair5.png','hair6.png','bg2.jpg','tub.png'];
+        var canvas = d.querySelector('#canvas-load');
+        var canvasForLoad = canvas.getContext('2d');
+        var i = 0,
+                length = imgArr.length,
+                z = 0,
+                wi = canvas.width,
+                hi = canvas.height,
+                deg = Math.PI/180;
+
+        //首页标题载入
+        function init(){
+            var interV;
+            var textArrIndex = 0;
+            var textArr = '虚拟假发店Demo'.split('');
+            setInterval(function (){
+                if(textArrIndex >= textArr.length ){
+                    clearInterval(interV);
+                    setTimeout(function (){
+                        d.querySelector('h1').classList.add('jump');
+                    },300);
+
+                }else{
+                    var span = d.createElement('span');
+                    var text = d.createTextNode(textArr[textArrIndex]);
+                    span.appendChild(text);
+                    d.querySelector('h1').appendChild(span);
+                }
+                textArrIndex++;
+            },150);
+            imgMove("#hair");
+            imgMove("#user");
+        }
+
+        canvasForLoad.fillStyle = '#eee';
+        canvasForLoad.textAlign = 'center';
+        canvasForLoad.font="bold 40px abc";
+        canvasForLoad.strokeStyle="#eee";
+        //展示图片
+        for(;i < length;i++){
+            var img = new Image();
+            img.onload = function(){
+                z++;
+                load(z,length);
+            };
+            img.onerror = function (){
+                z++;
+                load(z,length);
+            };
+            img.src = 'http://182.151.199.66:5082/hair/data/'+imgArr[i];
+        }
+
+        function load(num,len){
+            //进度条
+            if(num>=len){
+                canvasForLoad.closePath();
+                setTimeout(function (){
+                    d.querySelector('#canvas-load').style.display = 'none';
+                    d.querySelector('#load').style.display = 'none';
+                    init();
+                },1800)
+            }
+            var per = (num/len);
+            var text = parseInt(per*100);
+            canvasForLoad.clearRect(0,0,wi,hi);
+            canvasForLoad.fillText(text+'%',wi/2,(hi/2)+20,wi);
+            canvasForLoad.beginPath();
+            canvasForLoad.arc(wi/2,hi/2,100,0-deg,(per)*Math.PI*2,false);
+            canvasForLoad.stroke();
+        }
+    }();
+
+    //选择角色
+    var getUser = function getUser(){
+        //图片预览
+        $.fn.preImg=function(){
+            var _this=this;
+            _this.change(function(){
+                $('#loading').show();
+                var objUrl = getObjectURL(this.files[0]) ;
+                var img=new Image();
+                img.src=objUrl;
+                img.onload=function(){
+                    $('#loading').hide();
+                    $('#user').attr({'src':objUrl});
+                    $('#setting').show();
+                    $('#upload').hide();
+                    $('h1').hide();
+                };
+            }) ;
+        };
+        $('#input-file').preImg();
+        $('#input-file2').preImg();
+        //建立一個可存取到該file的url
+        function getObjectURL(file) {
+            var url = null ;
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+    }();
+
+    //选择假发
+    var getHair = function getHair(){
+        //出现假发橱窗
+        $('#cute').on('click',function (){
+            var box = $('#clothesBox');
+            box.toggleClass('active');
+            if(box.hasClass('active'))
+                box.find('img').each(function (){
+                    var _this = $(this);
+                    _this.attr('src',_this.data('src'));
+                })
+        });
+        //选择假发
+        $('#clothesBox').on('click','img',function (){
+            $('#loading').show();
+            var _this = $(this);
+            var _img = new Image();
+            _img.src = 'data/'+_this.data('url');
+            _img.onload = function (){
+                $('#loading').hide();
+                $('#hair').attr('src','data/'+_this.data('url'));
+                $('#clothesBox').removeClass('active');}
+        });
+    }();
+
+    //移动-缩放-旋转
+    var reqAnimationFrame = (function () {
+        return window[Hammer.prefixed(window, 'requestAnimationFrame')] || function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+
+    function imgMove(obj){
+        var el = document.querySelector(obj);
+        var START_X = 0;
+        var START_Y = 0;
+        var ticking = false;
+        var transform;
+        var mc = new Hammer.Manager(el);
+
+        mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+        mc.add(new Hammer.Rotate({ threshold: 0 })).recognizeWith(mc.get('pan'));
+        mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([mc.get('pan'), mc.get('rotate')]);
+
+        mc.on("panstart panmove", onPan);
+        mc.on("panend", onPanEnd);
+        mc.on("rotatestart rotatemove", onRotate);
+        mc.on("pinchstart pinchmove", onPinch);
+
+        function resetElement() {
+            el.className = 'animate';
+            transform = {
+                translate: { x: START_X, y: START_Y },
+                scale: 1,
+                angle: 0
+            };
+
+            requestElementUpdate();
+        }
+
+        function updateElementTransform() {
+            var value = [
+                        'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+                        'scale(' + transform.scale + ', ' + transform.scale + ')',
+                        'rotate('+transform.angle + 'deg)'
+            ];
+
+            value = value.join(" ");
+            el.style.webkitTransform = value;
+            el.style.mozTransform = value;
+            el.style.transform = value;
+            ticking = false;
+        }
+
+        function requestElementUpdate() {
+            if(!ticking) {
+                reqAnimationFrame(updateElementTransform);
+                ticking = true;
+            }
+        }
+
+        function logEvent(str) {
+
+        }
+
+        function onPan(ev) {
+            el.className = '';
+            transform.translate = {
+                x: START_X + ev.deltaX,
+                y: START_Y + ev.deltaY
+            };
+
+            requestElementUpdate();
+            logEvent(ev.type);
+        }
+        function onPanEnd(ev){
+            START_X += ev.deltaX;
+            START_Y += ev.deltaY;
+            transform.translate = {
+                x: START_X,
+                y: START_Y
+            };
+            requestElementUpdate();
+        }
+        var initScale = 1;
+        function onPinch(ev) {
+            if(ev.type == 'pinchstart') {
+                initScale = transform.scale || 1;
+            }
+            if(transform.scale < 0.5){
+                transform.scale = 0.5;
+            }
+            el.className = '';
+            transform.scale = initScale * ev.scale;
+
+            requestElementUpdate();
+            logEvent(ev.type);
+        }
+
+        var initAngle = 0;
+        function onRotate(ev) {
+            if(ev.type == 'rotatestart') {
+                initAngle = transform.angle || 0;
+            }
+
+            el.className = '';
+            transform.angle = initAngle + ev.rotation;
+            requestElementUpdate();
+            logEvent(ev.type);
+        }
+
+        resetElement();
+    }
+
+});
+
+</script>
+</html>
