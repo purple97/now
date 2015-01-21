@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="010228b2-6fb6-40d1-9bed-5bf395fed4f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/js/wxApiTest.js" afterPath="$PROJECT_DIR$/lib/js/wxApiTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wxapi.html" afterPath="$PROJECT_DIR$/app/wxapi.html" />
     </list>
     <ignored path="now.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,20 +36,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wxApiTest.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wxApiTest.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/js/wxApiTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.525" vertical-offset="0" max-vertical-offset="2373">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2373">
               <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.28" vertical-offset="0" max-vertical-offset="483">
+            <state vertical-scroll-proportion="0.41754386" vertical-offset="0" max-vertical-offset="855">
               <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
@@ -58,8 +59,8 @@
       <file leaf-file-name="wxapi.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/wxapi.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.703704" vertical-offset="2234" max-vertical-offset="3087">
-              <caret line="124" column="52" selection-start-line="124" selection-start-column="52" selection-end-line="124" selection-end-column="52" />
+            <state vertical-scroll-proportion="-10.888889" vertical-offset="0" max-vertical-offset="483">
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -131,15 +132,15 @@
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/lib/less/index.less" />
         <option value="$PROJECT_DIR$/dist/css/index.css" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/lib/js/plugins/hammer.min.js" />
         <option value="$PROJECT_DIR$/app/inputimg.Html" />
         <option value="$PROJECT_DIR$/app/inputimg.html" />
         <option value="$PROJECT_DIR$/lib/js/plugins/hammer.js" />
-        <option value="$PROJECT_DIR$/app/wxapi.html" />
         <option value="$PROJECT_DIR$/wxphp/wxapi.html" />
         <option value="$PROJECT_DIR$/wxphp/wxapi.php" />
         <option value="$PROJECT_DIR$/lib/js/wxApiTest.js" />
+        <option value="$PROJECT_DIR$/app/wxapi.html" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -528,14 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.28" vertical-offset="0" max-vertical-offset="483">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="924">
@@ -552,14 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/wxapi.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.703704" vertical-offset="2234" max-vertical-offset="3087">
-          <caret line="124" column="52" selection-start-line="124" selection-start-column="52" selection-end-line="124" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/js/demo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.231834" vertical-offset="4131" max-vertical-offset="10836">
@@ -570,8 +555,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/js/wxApiTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.525" vertical-offset="0" max-vertical-offset="2373">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2373">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wxapi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.888889" vertical-offset="0" max-vertical-offset="483">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41754386" vertical-offset="0" max-vertical-offset="855">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
