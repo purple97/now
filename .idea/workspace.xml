@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="010228b2-6fb6-40d1-9bed-5bf395fed4f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wxapi.html" afterPath="$PROJECT_DIR$/app/wxapi.html" />
-    </list>
+    <list default="true" id="010228b2-6fb6-40d1-9bed-5bf395fed4f5" name="Default" comment="" />
     <ignored path="now.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
