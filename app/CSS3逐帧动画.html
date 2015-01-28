@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>css3逐帧动画</title>
+    <meta name="keywords" content="animations,css3-animation,css动画,css3逐帧动画,css3怎么写动画,css3动画," />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <style>
+        *{padding:0;margin:0}
+        .hot{
+            width:160px;height:120px; overflow:hidden; background:url(http://img.xiaoho.com/2014/12/hot.png) no-repeat;
+            /* steps 代替 linear、ease-in、ease-out、ease-in-out*/
+            /*因为图片是由182张160*120的小图合并而成，因此只要只需要走181步就完成了整个动画，最后在keyframes的100%处调用最后一张图片的位置即可。*/
+            /* 动画名， 总时长，分割为181帧， 播放1次， 2s后播放， 画面停留在最后一帧 */
+            -webkit-animation:dajia 20s steps(181) 1 2s forwards;
+            -moz-animation:dajia 20s steps(181) 1 2s forwards;
+            -ms-animation:dajia 20s steps(181) 1 2s forwards;
+            -o-animation:dajia 20s steps(181) 1 2s forwards;
+            animation:dajia 20s steps(181) 1 2s forwards;
+        }
+        @keyframes dajia{
+            100%{ background-position:0 -21720px;}
+        }
+        @-webkit-keyframes dajia{
+            100%{ background-position:0 -21720px;}
+        }
+        @-moz-keyframes dajia{
+            100%{ background-position:0 -21720px;}
+        }
+        @-ms-keyframes dajia{
+            100%{ background-position:0 -21720px;}
+        }
+        @-o-keyframes dajia{
+            100%{ background-position:0 -21720px;}
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+<br><br>
+<p>这是原型gif</p><br>
+<img src="http://img.xiaoho.com/2014/12/hot.gif"><br><br><br><br>
+
+<p>下面是css3逐帧动画</p><br>
+<div class="hot"></div>
+</body>
+</html>
